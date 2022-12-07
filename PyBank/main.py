@@ -13,14 +13,10 @@ change = []
 # read file using csv module
 with open(csvpath) as file:
     csv_reader = csv.reader(file, delimiter=',')
-
     csv_header = next(csv_reader)
-    #print(f'CSV header: {csvheader}')
-
     for row in csv_reader:
         months.append(row[0])
         profit_loss.append(int(row[1]))
-
 
 for i in range(len(profit_loss)-1):
     change.append(profit_loss[i+1]-profit_loss[i])
@@ -28,6 +24,7 @@ for i in range(len(profit_loss)-1):
 change_months = months[1:]
 months_and_change = list(zip(change, change_months))
 
+# analyse the results
 Total_months = len(months)
 Total = '${}'.format(sum(profit_loss))
 Average_Change = '${:.2f}'.format(sum(change) / len(change))
@@ -51,6 +48,8 @@ with open('analysis/analysis.txt', 'a') as f:
     f.write('\n'.join(text))
 
 # print the analysis
+print('Financial Analysis')
+print('----------------------------')
 print('Total Months:',Total_months)
 print('Net Total:' , Total)
 print('Average Change:', Average_Change)
